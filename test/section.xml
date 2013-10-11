@@ -1,0 +1,10 @@
+<section xmlns="http://docbook.org/ns/docbook"
+         xmlns:xi="http://www.w3.org/2001/XInclude"
+         xmlns:xlink="http://www.w3.org/1999/xlink"
+         xml:id="xisect">
+<title>XIncluded section</title>
+<note xml:id="note">
+<para>This is a note.</para>
+</note>
+<para><link linkend="note">Link</link> to note.</para>
+</section>

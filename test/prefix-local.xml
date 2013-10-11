@@ -1,0 +1,8 @@
+<article xmlns="http://docbook.org/ns/docbook"
+         xmlns:db="http://docbook.org/ns/docbook"
+         xmlns:xi="http://www.w3.org/2001/XInclude">
+<title>Article title</title>
+<para>Introductory paragraph</para>
+<xi:include href="section.xml" db:idfixup="none" db:linkscope="user"/>
+<xi:include href="section.xml" db:idfixup="prefix" db:idprefix="prefix-" db:linkscope="local"/>
+</article>
