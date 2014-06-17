@@ -123,7 +123,7 @@
   </xsl:choose>
 </xsl:template>
 
-<xsl:template match="@db:idfixup|@db:idprefix|db:linkscope"/>
+<xsl:template match="@db:idfixup|@db:idprefix|@db:linkscope"/>
 
 <xsl:template match="attribute()|text()|comment()|processing-instruction()">
   <xsl:copy/>
