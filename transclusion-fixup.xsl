@@ -25,8 +25,8 @@
   <xsl:variable name="linkend"
                 select="if ($hash='#') then substring-after(., '#') else ."/>
 
-  <xsl:variable name="xiroot" select="(ancestor-or-self::*[@db:idfixup])[last()]"/>
-  <xsl:variable name="fixup" select="$xiroot/@db:idfixup"/>
+  <xsl:variable name="xiroot" select="(ancestor-or-self::*[@db:idfixup or @db:idprefix])[last()]"/>
+  <xsl:variable name="fixup" select="if($xiroot/@db:idfixup) then $xiroot/@db:idfixup else if($xiroot/@db:idprefix) then 'prefix' else 'none'"/>
   <xsl:variable name="linkscope" select="$xiroot/@db:linkscope"/>
 
   <xsl:choose>
@@ -134,8 +134,8 @@
 <xsl:function name="f:trans-id" as="xs:string?">
   <xsl:param name="id" as="attribute(xml:id)"/>
 
-  <xsl:variable name="xiroot" select="($id/ancestor-or-self::*[@db:idfixup])[last()]"/>
-  <xsl:variable name="fixup" select="$xiroot/@db:idfixup"/>
+  <xsl:variable name="xiroot" select="($id/ancestor-or-self::*[@db:idfixup or @db:idprefix])[last()]"/>
+  <xsl:variable name="fixup" select="if($xiroot/@db:idfixup) then $xiroot/@db:idfixup else if($xiroot/@db:idprefix) then 'prefix' else 'none'"/> 
 
   <xsl:choose>
     <xsl:when test="empty($fixup) or $fixup='none'">
