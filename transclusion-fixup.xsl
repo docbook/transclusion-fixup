@@ -35,7 +35,7 @@
     </xsl:when>
 
     <xsl:when test="($fixup='prefix' or $fixup='auto')
-                    and ($linkscope='local' or empty($linkscope))">
+                    and $linkscope='local'">
       <xsl:choose>
         <xsl:when test="$fixup='auto'">
           <xsl:variable name="id" select="concat('idf-', generate-id($xiroot), '-', .)"/>
