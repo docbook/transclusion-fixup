@@ -39,11 +39,25 @@
       <xsl:choose>
         <xsl:when test="$fixup='auto'">
           <xsl:variable name="id" select="concat('idf-', generate-id($xiroot), '-', .)"/>
-          <xsl:attribute name="{node-name(.)}" select="concat($hash, $id)"/>
+          <xsl:choose>
+            <xsl:when test="local-name(.) = 'href'">
+              <xsl:attribute name="{local-name(.)}" select="concat($hash, $id)" namespace="http://www.w3.org/1999/xlink"/>
+            </xsl:when>
+            <xsl:otherwise>
+              <xsl:attribute name="{node-name(.)}" select="concat($hash, $id)"/>
+            </xsl:otherwise>
+          </xsl:choose>
         </xsl:when>
         <xsl:when test="$fixup='prefix'">
           <xsl:variable name="id" select="concat($xiroot/@db:idprefix, .)"/>
-          <xsl:attribute name="{node-name(.)}" select="concat($hash, $id)"/>
+          <xsl:choose>
+            <xsl:when test="local-name(.) = 'href'">
+              <xsl:attribute name="{local-name(.)}" select="concat($hash, $id)" namespace="http://www.w3.org/1999/xlink"/>
+            </xsl:when>
+            <xsl:otherwise>
+              <xsl:attribute name="{node-name(.)}" select="concat($hash, $id)"/>
+            </xsl:otherwise>
+          </xsl:choose>
         </xsl:when>
         <xsl:otherwise>
           <xsl:message>
@@ -109,6 +123,9 @@
       </xsl:variable>
 
       <xsl:choose>
+        <xsl:when test="exists($link) and local-name() = 'href'">
+          <xsl:attribute name="{local-name(.)}" select="concat($hash, $link)" namespace="http://www.w3.org/1999/xlink"/>
+        </xsl:when>
         <xsl:when test="exists($link)">
           <xsl:attribute name="{node-name(.)}" select="concat($hash, $link)"/>
         </xsl:when>
